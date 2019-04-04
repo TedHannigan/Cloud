@@ -29,6 +29,7 @@ import java.io.IOException;
 
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.job.Job;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.file.GWFReader;
+import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.file.LogReader;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.file.One2HistoryReader;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.file.SWFReader;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.filters.Ignore;
@@ -80,6 +81,8 @@ public class FileBasedTraceProducerFactory {
 			producer = new GWFReader(fileName, from, to, furtherjobs, jobType);
 		} else if (fileName.endsWith(".swf")) {
 			producer = new SWFReader(fileName, from, to, furtherjobs, jobType);
+		}  else if (fileName.endsWith(".log")) {
+			producer = new LogReader(fileName, fileName, from, to, furtherjobs, jobType);
 		} else if (fileName.endsWith(".srtg")) {
 			SimpleRandomTraceGenerator srtg = SimpleRandomTraceGenerator.getInstanceFromFile(jobType, fileName);
 			srtg.setMaxTotalProcs(maxProcs);
